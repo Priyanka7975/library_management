@@ -14,5 +14,5 @@ public interface BookServiceMethods {
 	ResponseEntity<Object> getBook(int id);
 	List<Book> getAllBooks();
 	ResponseEntity<Object> getBookByTitle(String title);
-
+	ResponseEntity<Object> deleteById(Long id);
 }
