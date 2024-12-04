@@ -6,6 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,6 +36,7 @@ public class BookController {
     
 
     @PostMapping("/save")
+//    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<Book> saveBook(@RequestBody Book book) {
         log.info("New book data saved: " + book);
         return bookService.saveBook(book);
@@ -44,24 +47,28 @@ public class BookController {
         return bookService.getBook(id);
     }
 
-    @GetMapping("/get")
-    public ResponseEntity<Object> getBook1(@RequestParam int id) {
-        return bookService.getBook(id);
-    }
+    
 
-    @GetMapping("/get1")
+    @GetMapping("/get/")
     public ResponseEntity<Object> getBook11(@RequestHeader int id) {
         return bookService.getBook(id);
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/get/all")
     public List<Book> getAll() {
         return bookService.getAllBooks();
     }
 
-    @GetMapping("/getByTitle")
+    @GetMapping("/get/byTitle")
     public ResponseEntity<Object> findBookByTitle(@RequestHeader String title) {
         return bookService.getBookByTitle(title);
+    }
+    
+    @DeleteMapping("/delete/{id}")
+//    @PreAuthorize("hasRole('USER')")
+    public String deleteBook(@PathVariable Long id) {
+        bookService.deleteById(id);
+        return "Book deleted!";
     }
 }
 

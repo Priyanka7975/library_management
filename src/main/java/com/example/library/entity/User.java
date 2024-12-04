@@ -1,5 +1,6 @@
 package com.example.library.entity;
 
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +14,8 @@ public class User {
 	private String username;
 	private String password;
 	private String roles;
+	
+	 private boolean isApprovedByAdmin;
 	public long getId() {
 		return id;
 	}
@@ -36,6 +39,12 @@ public class User {
 	}
 	public void setRoles(String roles) {
 		this.roles = roles;
+	}
+	public boolean isApprovedByAdmin() {
+		return isApprovedByAdmin;
+	}
+	public void setApprovedByAdmin(boolean isApprovedByAdmin) {
+		this.isApprovedByAdmin = isApprovedByAdmin;
 	}
 	
 

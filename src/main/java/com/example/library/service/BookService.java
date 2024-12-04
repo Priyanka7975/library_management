@@ -50,5 +50,15 @@ public class BookService implements BookServiceMethods{
 		} 
        
 		}
+	public ResponseEntity<Object> deleteById(Long id) {
+	    Optional<Book> book = bookRepo.findById(id);
+	    if (book.isPresent()) {
+	        bookRepo.deleteById(id);
+	        return ResponseEntity.status(200).body("Book with ID " + id + " has been deleted successfully.");
+	    } else {
+	        return ResponseEntity.status(404).body("No book found with the given ID.");
+	    }
+	}
+	
 
 }
