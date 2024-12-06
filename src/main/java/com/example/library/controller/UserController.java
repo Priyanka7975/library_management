@@ -30,6 +30,7 @@ public class UserController {
 		} 
 	 @PutMapping("/approve/{id}")
 	    public ResponseEntity<Object> approveUser(@PathVariable Long id) {
+		 System.out.println("Hi");
 	        return userService.approveUser(id);
 	    }
 	
