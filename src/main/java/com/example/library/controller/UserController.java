@@ -24,12 +24,13 @@ public class UserController {
 	private BookService bookService;
 	@PostMapping("/save") 
 //	@PreAuthorize("hasAuthority('ADMIN')") 
-	public ResponseEntity<User> createUser(@RequestBody User user) {
-		User savedUser = userService.saveUser(user);
+	public ResponseEntity<ResponseEntity<String>> createUser(@RequestBody User user) {
+		ResponseEntity<String> savedUser = userService.saveUser(user);
 		return ResponseEntity.ok(savedUser); 
 		} 
 	 @PutMapping("/approve/{id}")
 	    public ResponseEntity<Object> approveUser(@PathVariable Long id) {
+
 		 System.out.println("Hi");
 	        return userService.approveUser(id);
 	    }
