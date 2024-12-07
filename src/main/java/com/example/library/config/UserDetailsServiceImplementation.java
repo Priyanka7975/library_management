@@ -24,15 +24,16 @@ private UserRepo userRepo;
 		if(user==null) {
 			throw new UsernameNotFoundException("User does not exist.");
 		}
-	 
-	List<SimpleGrantedAuthority> authorities = new ArrayList<>(); 
-	for (String role : user.getRoles().split(",")) {
-		authorities.add(new SimpleGrantedAuthority(role)); 
-		} 
-	return new org.springframework.security.core.userdetails.User(
-			user.getUsername(),
-			user.getPassword(), 
-			authorities);
+//	 
+//	List<SimpleGrantedAuthority> authorities = new ArrayList<>(); 
+//	for (String role : user.getRoles().split(",")) {
+//		authorities.add(new SimpleGrantedAuthority(role)); 
+//		} 
+//	return new org.springframework.security.core.userdetails.User(
+//			user.getUsername(),
+//			user.getPassword(), 
+//			authorities);
+		return new UserDetailsImpl(user);
 		
 	}
 

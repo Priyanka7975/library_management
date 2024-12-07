@@ -1,5 +1,6 @@
 package com.example.library.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,9 @@ public class UserService {
 		return userRepo.findByUsername(username);
 	}
 	
-	
+	public List<User> getAllUsers() {
+        return userRepo.findAll();
+    }
 	public ResponseEntity<Object> approveUser(Long userId) {
         Optional<User> user = userRepo.findById(userId);
         if (user.isPresent()) {
