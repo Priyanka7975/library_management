@@ -13,12 +13,39 @@ import com.example.library.repository.BookRepo;
 public class BookService implements BookServiceMethods{
 	@Autowired
 	private BookRepo bookRepo;
-
 	@Override
 	public ResponseEntity<Book> saveBook(Book book) {
-		return ResponseEntity.status(201).body(bookRepo.save(book));
+	    int numberOfCopies = book.getNoOfCopies();
+	    if (numberOfCopies > 1) {
+	        for (int i = 0; i < numberOfCopies; i++) {
+	            Book newBook = new Book();
+	            newBook.setTitle(book.getTitle());
+	            newBook.setAuthor(book.getAuthor());
+	            newBook.setAddedBy(book.getAddedBy());
+	            newBook.setNoOfCopies(1); // Saving one copy per iteration
+	            bookRepo.save(newBook); // Save each copy
+	        }
+	        return ResponseEntity.status(201).body(book); // Return original book after saving all copies
+	    }
+	    // If only one copy, save the original book
+	    return ResponseEntity.status(201).body(bookRepo.save(book));
 	}
 
+//	@Override
+//	public ResponseEntity<Book> saveBook(Book book) {
+//		return ResponseEntity.status(201).body(bookRepo.save(book));
+//	}
+	 public void addBooks(Book book) {
+	        int numberOfCopies = book.getNoOfCopies();
+	        for (int i = 0; i < numberOfCopies; i++) {
+	            Book newBook = new Book();
+	            newBook.setTitle(book.getTitle());
+	            newBook.setAuthor(book.getAuthor());
+	            newBook.setAddedBy(book.getAddedBy());
+	            newBook.setNoOfCopies(1); // Each entry represents one copy
+	            bookRepo.save(newBook);
+	        }
+	    }
 	@Override
 	public ResponseEntity<Object> getBook(int id) {
 		

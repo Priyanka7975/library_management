@@ -10,9 +10,10 @@ import com.example.library.entity.Book;
 public interface BookServiceMethods {
 	
 	
-	ResponseEntity<Book> saveBook(Book book);
+	
 	ResponseEntity<Object> getBook(int id);
 	List<Book> getAllBooks();
 	ResponseEntity<Object> getBookByTitle(String title);
 	ResponseEntity<Object> deleteById(Long id);
+	ResponseEntity<Book> saveBook(Book book);
 }
