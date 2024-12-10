@@ -35,11 +35,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.antMatchers("/book/get/**").permitAll()
 		.antMatchers("/book/save").hasAuthority("LIBRARIAN")
 		.antMatchers("/book/delete/**").hasAuthority("LIBRARIAN")
+		.antMatchers("/admin/**").hasAuthority("ADMIN")
 		.antMatchers("/user/approve/**").permitAll()
 		.antMatchers("/login").permitAll()
 		.anyRequest().authenticated() 
 		.and() 
-		.formLogin().defaultSuccessUrl("/", true).permitAll() 
+		.formLogin().defaultSuccessUrl("/home", true).permitAll() 
 		.and() .logout().logoutSuccessUrl("/login").permitAll();
 		}
 }

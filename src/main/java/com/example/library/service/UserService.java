@@ -1,5 +1,6 @@
 package com.example.library.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +17,20 @@ public class UserService {
 	private UserRepo userRepo; 
 	@Autowired 
 	private PasswordEncoder passwordEncoder; 
-	public User saveUser(User user) { 
+	public ResponseEntity<String> saveUser(User user) { 
 		user.setPassword(passwordEncoder.encode(user.getPassword())); 
-		return userRepo.save(user); 
+		User savedUser = userRepo.save(user);
+	    return ResponseEntity.status(201).body("User saved successfully: " + savedUser.getUsername());
+		//return userRepo.save(user); 
 		} 
-	public User findByUsername(String username) {
-		return userRepo.findByUsername(username);
+	public ResponseEntity<String> findByUsername(String username) {
+		 userRepo.findByUsername(username);
+		return ResponseEntity.status(200).body("User approved successfully.");
 	}
 	
-	
+	public List<User> getAllUsers() {
+        return userRepo.findAll();
+    }
 	public ResponseEntity<Object> approveUser(Long userId) {
         Optional<User> user = userRepo.findById(userId);
         if (user.isPresent()) {

@@ -1,5 +1,6 @@
 package com.example.library.entity;
 
+import javax.persistence.Transient; 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,12 +22,14 @@ public class Book{
 	private String author;
 	@Min(value=1,message="Price should be atleast  1")
 	private double price;
-    @Transient
-	private int numberOfCopies=1;  
-    
+      
     @ManyToOne
     private long addedBy; 
-	public int getId() {
+
+	@Transient
+	private int noOfCopies = 1; 
+	
+   	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
@@ -50,19 +53,20 @@ public class Book{
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	public int getNumberOfCopies() {
-		return numberOfCopies;
-	}
-	public void setNumberOfCopies(int numberOfCopies) {
-		this.numberOfCopies = numberOfCopies;
-	}
 	public long getAddedBy() {
 		return addedBy;
 	}
 	public void setAddedBy(long addedBy) {
 		this.addedBy = addedBy;
 	}
-	
+
+	public int getNoOfCopies() {
+		return noOfCopies;
+	}
+	public void setNoOfCopies(int noOfCopies) {
+		this.noOfCopies = noOfCopies;
+	}
+		
 }
 
 //import jakarta.persistence.GeneratedValue;

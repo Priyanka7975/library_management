@@ -21,6 +21,10 @@ public class UserDetailsImpl implements UserDetails{
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		
 		return Collections.singleton(new SimpleGrantedAuthority(user.getRoles()));
+//		 return user.getRoles().stream()
+//	               .map(role -> new SimpleGrantedAuthority(role))
+//	               .collect(Collectors.toList());
+
 	}
 
 	@Override
