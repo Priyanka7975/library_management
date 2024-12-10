@@ -25,11 +25,11 @@ import com.example.library.service.BookService;
 public class BookController {
     Logger log = LoggerFactory.getLogger(BookController.class);
 
-    @GetMapping("/")
-    public ResponseEntity<String> homePage() {
-        log.info("Home page is called...");
-        return ResponseEntity.status(200).body("Welcome To Home Page");
-    }
+//    @GetMapping("/")
+//    public ResponseEntity<String> homePage() {
+//        log.info("Home page is called...");
+//        return ResponseEntity.status(200).body("Welcome To Home Page");
+//    }
 
     @Autowired
     private BookService bookService;

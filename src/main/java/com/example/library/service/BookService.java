@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.example.library.entity.Book;
@@ -16,6 +18,8 @@ public class BookService implements BookServiceMethods{
 
 	@Override
 	public ResponseEntity<Book> saveBook(Book book) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		book.setAddedBy(authentication.getPrincipal());
 		return ResponseEntity.status(201).body(bookRepo.save(book));
 	}
 
