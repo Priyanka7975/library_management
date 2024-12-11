@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.example.library.entity.Book;
@@ -15,6 +17,10 @@ public class BookService implements BookServiceMethods{
 	private BookRepo bookRepo;
 	@Override
 	public ResponseEntity<Book> saveBook(Book book) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		book.setAddedBy(authentication.getPrincipal());
+		return ResponseEntity.status(201).body(bookRepo.save(book));
+
 	    int numberOfCopies = book.getNoOfCopies();
 	    if (numberOfCopies > 1) {
 	        for (int i = 0; i < numberOfCopies; i++) {
@@ -29,6 +35,7 @@ public class BookService implements BookServiceMethods{
 	    }
 	    // If only one copy, save the original book
 	    return ResponseEntity.status(201).body(bookRepo.save(book));
+
 	}
 
 //	@Override
